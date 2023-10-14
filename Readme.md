@@ -1,14 +1,19 @@
-Review and Usage Guide
+### Review and Usage Guide
 
-This project is a full-stack application that includes a backend server and a frontend UI. The backend server is written in Go and the frontend UI is built with Next.js. The application is containerized using Docker and orchestrated using Docker Compose. The project also includes a Makefile for easy management of common tasks.
-Requirements
+# This project is a full-stack application that includes a backend server and a frontend UI. The backend server is written in Go and the frontend UI is built with Next.js. The application is containerized using Docker and orchestrated using Docker Compose. The project also includes a Makefile for easy management of common tasks.
 
+### Prerequisites
+
+To run this project, you need the following:
+
+- Go: The backend server is written in Go, so you need Go installed on your machine to build and run the server.
+- Node.js: The frontend UI is built with Next.js, so you need Node.js installed on your machine to build and run the UI.
 - Docker: The application is containerized, so you need Docker installed on your machine to run it.
 - Docker Compose: This is used to manage and orchestrate the application services.
 - Make: A Makefile is included in the project to simplify the execution of common tasks.
   Using the Makefile
 
-The Makefile includes several commands that make it easy to build and run the application:
+## The Makefile includes several commands that make it easy to build and run the application:
 
 - build-server: This command builds the Docker image for the backend server.
 - start-server: This command starts the backend server in a Docker container.
@@ -26,7 +31,7 @@ The Makefile includes several commands that make it easy to build and run the ap
 To use these commands, simply type make <command> in your terminal. For example, to build and start the server, you would type make build-server and then make start-server.
 Using Docker Directly
 
-If you prefer to use Docker directly instead of the Makefile, you can do so with the following commands:
+# If you prefer to use Docker directly instead of the Makefile, you can do so with the following commands:
 
 - To build the server: docker build -t todo-server Dockerfile.backend
 - To start the server: docker run -d -p 8080:8080 --env APP_PORT=8080 --env DEBUG_LEVEL=error --env SQL_LITE_DATABASE_PATH=./prod.db --name todo-server todo-server
@@ -37,7 +42,13 @@ If you prefer to use Docker directly instead of the Makefile, you can do so with
 
 Please note that you can config the application by updating the environment variable values.
 
-Usages and Examples
+# If you prefer local development, you can run the server and UI locally using the following commands:
+
+- Clone the repository: `git clone https://github.com/0prodigy/fullstack-todo.git`
+- To start the server: `cd backend && go run ./cmd/`
+- To start the UI: `cd frontend && yarn run dev`
+
+### Usages and Examples
 
 Accessing the Application From a Browser
 
@@ -69,3 +80,15 @@ curl -X PUT -H "Content-Type: application/json" -H "Authorization: <token>" -d '
 this will return the updated task in the response body
 
 curl -X DELETE -H "Authorization: <token>" http://localhost:8080/api/v1/tasks/<id>
+
+## Running the tests
+
+To run the tests, run the following command:
+
+```bash
+  make test
+```
+
+# If you prefer to run test locally, you can do so with the following commands:
+
+- To run the tests: `cd backend && go test ./...`
