@@ -1,64 +1,16 @@
 "use client";
-import { Task } from "@/@types/tasks";
 import List from "@/components/tasks/List";
-import { BASE_URL } from "@/constant";
-import { nextLocalStorage } from "@/utils/utils";
-import { useEffect, useState } from "react";
+import { TasksProvider, useTaskContext } from "../_context/tasks";
 
-export default function Tasks() {
-  const [tasks, setTasks] = useState<Task[]>([]);
-  const token = nextLocalStorage()?.getItem("auth_token");
+export function Tasks() {
+  const { tasks, createTask } = useTaskContext();
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const title = e.currentTarget.task.value;
-    const description = e.currentTarget.description.value;
-    const status = e.currentTarget.status.value;
-
-    try {
-      await fetch(`${BASE_URL}/tasks/`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({ title, description, status }),
-      })
-        .then((res) => res.json())
-        .then((res) => {
-          if (res.error) {
-            throw new Error(res.error);
-          }
-          alert("Task created successfully");
-        });
-    } catch (e) {
-      alert(e);
-    }
-  };
-
-  useEffect(() => {
-    fetch(`${BASE_URL}/tasks/`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
-      .then((res) => res.json())
-      .then((res) => {
-        if (res.error) {
-          alert(res.error);
-          setTasks([]);
-        } else {
-          setTasks(res);
-        }
-      })
-      .catch((e) => setTasks([]));
-  }, []);
   return (
     <div className="min-w-[600px] bg-white rounded shadow p-6 m-4 w-full lg:w-3/4 lg:max-w-lg flex flex-col item-middle justify-center">
       <div className="w-[500px]">
         <div className="mb-4">
           <h1 className="text-grey-darkest">Todo List</h1>
-          <form action="#" onSubmit={handleSubmit}>
+          <form action="#" onSubmit={createTask}>
             <div className="flex flex-col mt-4">
               <div>
                 <input
@@ -98,5 +50,13 @@ export default function Tasks() {
       </div>
       <List tasks={tasks} />
     </div>
+  );
+}
+
+export default function TasksPage() {
+  return (
+    <TasksProvider>
+      <Tasks />
+    </TasksProvider>
   );
 }

@@ -11,7 +11,7 @@ export function TaskItem({
 }) {
   return (
     <div className="flex mb-4 items-center gap-4">
-      <div className="w-full">
+      <div className={`w-full ${task.status == "CANCELED" && "opacity-25"}`}>
         <h4
           className={`w-full font-bold text-grey-darkest ${
             task.status == "COMPLETED" && "line-through"
@@ -27,6 +27,7 @@ export function TaskItem({
           required
           name="status"
           onChange={(e) => onStatusChange(e.target.value, task)}
+          defaultValue={task.status}
         >
           <option value="TODO">TODO</option>
           <option value="COMPLETED">COMPLETED</option>
