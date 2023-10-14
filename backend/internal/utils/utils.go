@@ -15,7 +15,7 @@ func CreateJWTToken(username string) string {
 	})
 
 	// Get the signed token string.
-	signedToken, err := token.SignedString(c.JWT_SECRET)
+	signedToken, err := token.SignedString([]byte(c.JWT_SECRET))
 	if err != nil {
 		panic(err)
 	}
@@ -26,7 +26,7 @@ func ValidateJWTToken(tokenString string) (string, error) {
 	// Parse the JWT string and store the result in `claims`.
 	claim := jwt.MapClaims{}
 	_, err := jwt.ParseWithClaims(tokenString, claim, func(token *jwt.Token) (interface{}, error) {
-		return c.JWT_SECRET, nil
+		return []byte(c.JWT_SECRET), nil
 	})
 
 	if err != nil {

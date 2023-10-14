@@ -38,7 +38,7 @@ func createTask(c *fiber.Ctx) error {
 	if err != nil {
 		return fiber.NewError(fiber.StatusInternalServerError, "failed to save task")
 	}
-	return nil
+	return c.JSON(task)
 }
 
 func updateTask(c *fiber.Ctx) error {
@@ -67,7 +67,7 @@ func updateTask(c *fiber.Ctx) error {
 		return fiber.NewError(fiber.StatusInternalServerError, "failed to update task")
 	}
 
-	return nil
+	return c.JSON(task)
 }
 
 func deleteTask(c *fiber.Ctx) error {
@@ -91,7 +91,9 @@ func deleteTask(c *fiber.Ctx) error {
 		return fiber.NewError(fiber.StatusInternalServerError, "failed to delete task")
 	}
 
-	return nil
+	return c.JSON(fiber.Map{
+		"message": "task deleted successfully",
+	})
 }
 
 func setupTaskRouter(app *fiber.App) {

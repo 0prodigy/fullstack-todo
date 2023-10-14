@@ -31,12 +31,14 @@ type UserTask struct {
 	TaskID uint `gorm:"not null" json:"task_id"`
 }
 
-func GetUserTasks(db *gorm.DB, username string) ([]Task, error) {
-	tasks := []Task{}
-	if err := db.Where("username = ?", username).Find(&tasks).Error; err != nil {
+func GetUserTasks(db *gorm.DB, username string) ([]*Task, error) {
+	tasks := []*Task{}
+
+	if err := db.Joins("JOIN user_tasks on user_tasks.id = tasks.id").Joins("JOIN users on users.id = user_tasks.user_id").Where("users.username = ?", username).Find(&tasks).Error; err != nil {
 		log.WithError(err).Error("failed to fetch user tasks")
 		return nil, err
 	}
+
 	return tasks, nil
 }
 
@@ -105,7 +107,10 @@ func (t *Task) Delete(db *gorm.DB, username string) error {
 		return err
 	}
 
-	if err := db.Delete(&UserTask{}).Where("user_id = ? AND task_id = ?", user.ID, t.ID).Error; err != nil {
+	if err := db.Where("user_id = ? AND task_id = ?", user.ID, t.ID).Delete(&UserTask{
+		UserID: user.ID,
+		TaskID: t.ID,
+	}).Error; err != nil {
 		log.WithError(err).Error("failed to delete user task")
 		return err
 	}

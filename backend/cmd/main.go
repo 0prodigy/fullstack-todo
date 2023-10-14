@@ -29,10 +29,15 @@ func main() {
 	// create rest api for auth and then for todo with validation and authorization
 	app := fiber.New(fiber.Config{})
 
+	app.Get("/", func(c *fiber.Ctx) error {
+		return c.SendString("Hello, World 👋!")
+	})
+
 	app.Use(cors.New())
+	app.Use(handleError)
 	setupAuthRouter(app)
 	setupTaskRouter(app)
 	// start server
-	log.Fatal(app.Listen(":5000"))
+	log.Fatal(app.Listen(":8000"))
 
 }
