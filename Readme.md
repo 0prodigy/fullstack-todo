@@ -36,3 +36,36 @@ If you prefer to use Docker directly instead of the Makefile, you can do so with
 - To stop the UI: docker stop todo-ui && docker rm todo-ui
 
 Please note that you can config the application by updating the environment variable values.
+
+Usages and Examples
+
+Accessing the Application From a Browser
+
+Once the application is running, you can access it at http://localhost:3000.
+When you first access the application, you will be prompted to login. The default username and password are admin and admin.
+Once you login, you will be taken to the home page where you can create a new task, view all tasks, and update the status of a task.
+The list of operations you can perform are:
+
+- Create a new task: Click the Create Task button and enter the task details.
+- View all tasks: Click the View Tasks button.
+- Update the status of a task: Click the Update Status button next to the task you want to update.
+- Delete a task: Click the Delete button next to the task you want to delete.
+
+Accessing the Application From the CURL Command Line
+
+You can also access the application from the command line using the CURL command. For example, to create a new task, you would type the following command:
+
+Sign in
+
+curl -X POST -H "Content-Type: application/json" -d '{"username":"admin","password":"admin"}' http://localhost:8080/api/v1/signin
+this will return a token in the response body, copy the token and use it in the next request
+
+curl -X GET -H "Authorization: <token>" http://localhost:8080/api/v1/tasks
+
+curl -X POST -H "Content-Type: application/json" -H "Authorization: <token>" -d '{"title":"test","description":"test","status":"TODO"}' http://localhost:8080/api/v1/tasks
+this will return the created task in the response body
+
+curl -X PUT -H "Content-Type: application/json" -H "Authorization: <token>" -d '{"title":"test","description":"test","status":"COMPLETED"}' http://localhost:8080/api/v1/tasks/<id>
+this will return the updated task in the response body
+
+curl -X DELETE -H "Authorization: <token>" http://localhost:8080/api/v1/tasks/<id>
