@@ -1,6 +1,8 @@
 package main
 
 import (
+	"fmt"
+
 	"github.com/0prodigy/fullstack-todo/database"
 	"github.com/0prodigy/fullstack-todo/internal/config"
 	"github.com/0prodigy/fullstack-todo/internal/logger"
@@ -38,6 +40,6 @@ func main() {
 	setupAuthRouter(app)
 	setupTaskRouter(app)
 	// start server
-	log.Fatal(app.Listen(":8000"))
+	log.Fatal(app.Listen(fmt.Sprintf(":%s", c.APP_PORT)))
 
 }

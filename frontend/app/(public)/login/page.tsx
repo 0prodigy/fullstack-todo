@@ -1,10 +1,12 @@
 "use client";
 import { BASE_URL } from "@/constant";
 import { nextLocalStorage } from "@/utils/utils";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export default function Login() {
   const [isSignUp, setIsSignUp] = useState(false);
+  const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -46,6 +48,7 @@ export default function Login() {
             }
             console.log("setting token");
             nextLocalStorage()?.setItem("auth_token", res.token);
+            router.push("/tasks");
           });
       } catch (e) {
         alert(e);

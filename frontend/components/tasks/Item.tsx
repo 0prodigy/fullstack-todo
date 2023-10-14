@@ -15,7 +15,7 @@ export function TaskItem({
         <h4
           className={`w-full font-bold text-grey-darkest ${
             task.status == "COMPLETED" && "line-through"
-          }`}
+          } dark:text-white`}
         >
           {task.title}
         </h4>

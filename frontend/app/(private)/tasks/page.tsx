@@ -2,11 +2,11 @@
 import List from "@/components/tasks/List";
 import { TasksProvider, useTaskContext } from "../_context/tasks";
 
-export function Tasks() {
+function Tasks() {
   const { tasks, createTask } = useTaskContext();
 
   return (
-    <div className="min-w-[600px] bg-white rounded shadow p-6 m-4 w-full lg:w-3/4 lg:max-w-lg flex flex-col item-middle justify-center">
+    <div className="min-w-[600px] p-6 flex flex-col align-middle justify-center bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md  dark:bg-gray-800 dark:border-gray-700">
       <div className="w-[500px]">
         <div className="mb-4">
           <h1 className="text-grey-darkest">Todo List</h1>
