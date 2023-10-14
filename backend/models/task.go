@@ -19,7 +19,7 @@ type Task struct {
 	ID          uint       `gorm:"primaryKey,autoIncrement" json:"id"`
 	Title       string     `gorm:"not null" json:"title"`
 	Description string     `gorm:"not null" json:"description"`
-	Status      TaskStatus `gorm:"type:enum(TODO,COMPLETED,CANCELED)" json:"status"`
+	Status      TaskStatus `gorm:"type:varchar(11);not null" json:"status"`
 }
 
 type UserTask struct {

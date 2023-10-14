@@ -20,11 +20,13 @@ func InitDB() {
 func RunMigrations() {
 	db.AutoMigrate(&models.User{})
 	db.AutoMigrate(&models.Task{})
+	db.AutoMigrate(&models.UserTask{})
 }
 
 func DropTables() {
 	db.Migrator().DropTable(&models.User{})
 	db.Migrator().DropTable(&models.Task{})
+	db.Migrator().DropTable(&models.UserTask{})
 }
 
 func GetDB() *gorm.DB {
