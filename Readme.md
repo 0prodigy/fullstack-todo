@@ -1,6 +1,6 @@
 ### Review and Usage Guide
 
-# This project is a full-stack application that includes a backend server and a frontend UI. The backend server is written in Go and the frontend UI is built with Next.js. The application is containerized using Docker and orchestrated using Docker Compose. The project also includes a Makefile for easy management of common tasks.
+This project is a full-stack application that includes a backend server and a frontend UI. The backend server is written in Go and the frontend UI is built with Next.js. The application is containerized using Docker and orchestrated using Docker Compose. The project also includes a Makefile for easy management of common tasks.
 
 ### Prerequisites
 
