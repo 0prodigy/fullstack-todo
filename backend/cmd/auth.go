@@ -53,7 +53,7 @@ func handleLoginUser(c *fiber.Ctx) error {
 	log.Debugf("fetching user: %s", reqUser.Username)
 	user, err := models.GetUserByUsername(db, reqUser.Username)
 	if err != nil {
-		return fiber.NewError(fiber.StatusInternalServerError, "invalid username")
+		return fiber.NewError(fiber.StatusUnauthorized, "invalid username or password")
 	}
 
 	log.Debugf("comparing passwords for user: %s", reqUser.Username)

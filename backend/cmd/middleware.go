@@ -11,8 +11,13 @@ import (
 
 func handleError(c *fiber.Ctx) error {
 	err := c.Next()
+
+	if err != nil && err.(*fiber.Error).Message != "" {
+		return c.Status(err.(*fiber.Error).Code).JSON(fiber.Map{
+			"error": err.Error(),
+		})
+	}
 	if err != nil && string(c.Response().Header.ContentType()) != fiber.MIMEApplicationJSON {
-		log.Debugf("error: %s", err.Error())
 		return c.Status(c.Response().StatusCode()).JSON(fiber.Map{
 			"error": err.Error(),
 		})
