@@ -35,7 +35,7 @@ func TestCreateTask(t *testing.T) {
 			payload: []byte(`{
 				"title": "test",
 				"description": "test",
-				"status": "TODO"
+				"status": "BACKLOG"
 			}`),
 			expectedCode: http.StatusOK,
 		},
@@ -51,7 +51,7 @@ func TestCreateTask(t *testing.T) {
 			name: "Invalid create task without title",
 			payload: []byte(`{
 				"description": "test",
-				"status": "TODO"
+				"status": "BACKLOG"
 			}`),
 			expectedCode: http.StatusBadRequest,
 		},
@@ -59,7 +59,7 @@ func TestCreateTask(t *testing.T) {
 			name: "Invalid create task without description",
 			payload: []byte(`{
 				"title": "test",
-				"status": "TODO"
+				"status": "BACKLOG"
 			}`),
 			expectedCode: http.StatusBadRequest,
 		},
