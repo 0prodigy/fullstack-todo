@@ -1,5 +1,5 @@
 import { useTaskContext } from "../../_context/tasks";
-import { TaskStatus } from "@/@types/tasks";
+import { Task, TaskStatus } from "@/@types/tasks";
 
 function TodoForm({ onFormSubmit }: { onFormSubmit: () => void }) {
   const { createTask } = useTaskContext();
@@ -14,9 +14,12 @@ function TodoForm({ onFormSubmit }: { onFormSubmit: () => void }) {
     const task = {
       title: title.value,
       description: description.value,
-      reminder: new Date(reminder.value).toISOString(),
       status: "BACKLOG" as TaskStatus,
-    };
+    } as Task;
+
+    if (reminder.value) {
+      task.reminder = new Date(reminder.value).toISOString();
+    }
 
     createTask(task);
     onFormSubmit();

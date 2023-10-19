@@ -21,7 +21,7 @@ type Task struct {
 	Title       string     `gorm:"not null" json:"title"`
 	Description string     `gorm:"not null" json:"description"`
 	Status      TaskStatus `gorm:"type:varchar(11);not null" json:"status"`
-	Reminder    time.Time  `json:"reminder"`
+	Reminder    *time.Time `json:"reminder,omitempty"`
 }
 
 type UserTask struct {

@@ -5,5 +5,5 @@ export interface Task {
   title: string;
   description: string;
   status: TaskStatus;
-  reminder: string;
+  reminder?: string;
 }
