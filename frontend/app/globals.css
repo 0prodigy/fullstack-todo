@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@500;600;700&family=Varela+Round&display=swap");
 
 :root {
   --foreground-rgb: 0, 0, 0;
@@ -16,12 +17,20 @@
   }
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+
+@layer base {
+  html {
+    font-family: "Quicksand", sans-serif;
+  }
+}
+
+
+.card-body::-webkit-scrollbar {
+  width: 5px;
+  background-color: #f5f5f5;
+}
+
+.card-body::-webkit-scrollbar-thumb {
+  background-color: #ff9000;
+  border-radius: 4px;
 }
