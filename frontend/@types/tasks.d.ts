@@ -1,4 +1,4 @@
-export type TaskStatus = "TODO" | "COMPLETED" | "CANCELED";
+export type TaskStatus = "BACKLOG" | "COMPLETED" | "CANCELED";
 
 export interface Task {
   id: number;

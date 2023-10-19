@@ -6,7 +6,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 
 export interface TasksContextValue {
   tasks: Task[];
-  createTask: (e: React.FormEvent<HTMLFormElement>) => void;
+  createTask: (task: Omit<Task, "id">) => void;
   getTasks: () => void;
   removeTask: (id: number) => void;
   updateTaskStatus: (status: string, task: Task) => void;
@@ -24,12 +24,7 @@ export function TasksProvider({ children }: { children: React.ReactNode }) {
   const [tasks, setTasks] = useState<Task[]>([]);
   const token = nextLocalStorage()?.getItem("auth_token");
 
-  const createTask = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const title = e.currentTarget.task.value;
-    const description = e.currentTarget.description.value;
-    const status = e.currentTarget.status.value;
-
+  const createTask = async (task: Omit<Task, "id">) => {
     try {
       await fetch(`${BASE_URL}/tasks/`, {
         method: "POST",
@@ -37,7 +32,7 @@ export function TasksProvider({ children }: { children: React.ReactNode }) {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify({ title, description, status }),
+        body: JSON.stringify({ ...task }),
       })
         .then((res) => res.json())
         .then((res) => {

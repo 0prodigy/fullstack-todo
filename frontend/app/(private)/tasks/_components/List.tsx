@@ -6,7 +6,7 @@ import { TaskItem } from "./Item";
 import { useTaskContext } from "@/app/(private)/_context/tasks";
 
 export default function List({ tasks }: { tasks: Task[] }) {
-  const [filter, setFilter] = useState("all");
+  const [filter, setFilter] = useState("");
   const { removeTask, updateTaskStatus } = useTaskContext();
 
   return (
@@ -17,10 +17,10 @@ export default function List({ tasks }: { tasks: Task[] }) {
             <div
               key={status}
               onClick={() => setFilter(status)}
-              className={`p-3 cursor-pointer font-semibold center relative inline-block select-none whitespace-nowrap rounded-lg  align-baseline font-sans text-xs uppercase leading-none text-white ${
+              className={`p-3 cursor-pointer font-semibold center relative inline-block select-none whitespace-nowrap rounded-lg  align-baseline font-sans text-xs uppercase leading-none text-[#ff9100] ${
                 status.toLowerCase() == filter
-                  ? "bg-orange-900"
-                  : "text-[#ff9100] border border-[#ff9100] border-dashed"
+                  ? "bg-orange-900 text-white"
+                  : "border border-[#ff9100] border-dashed"
               } hover:bg-orange-900 hover:text-white`}
             >
               {status}
