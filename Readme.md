@@ -92,3 +92,9 @@ To run the tests, run the following command:
 # If you prefer to run test locally, you can do so with the following commands:
 
 - To run the tests: `cd backend && go test ./...`
+
+## Acknowledgements
+
+- [Fullstack Go](https://github.com/0prodigy/fullstack-go) - This project is based on the Fullstack Go project.
+- The frontend UI is built with Next.js. and the backend server is written in Go.
+- The Design is inspired by [Dribble](https://dribbble.com/shots/6565691-Task-app).
