@@ -14,7 +14,7 @@ function TodoForm({ onFormSubmit }: { onFormSubmit: () => void }) {
     const task = {
       title: title.value,
       description: description.value,
-      // reminder: reminder.value,
+      reminder: new Date(reminder.value).toISOString(),
       status: "BACKLOG" as TaskStatus,
     };
 

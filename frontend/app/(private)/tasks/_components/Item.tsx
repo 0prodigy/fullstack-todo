@@ -11,9 +11,11 @@ export function TaskItem({
 }) {
   return (
     <div>
-      <div className="flex items-center gap-1">
-        <div className="status font-bold text-sm -rotate-90 py-3">Backlog</div>
-        <div className="py-3 relative">
+      <div className="flex items-center">
+        <div className="status font-bold text-sm -rotate-90 py-2 lowercase min-w-[75px] -ml-2">
+          {task.status}
+        </div>
+        <div className="py-3 relative -ml-3">
           {task.status.toLowerCase() == "backlog" ? (
             <span
               onClick={() => onStatusChange("PENDING" as TaskStatus, task)}
@@ -63,8 +65,13 @@ export function TaskItem({
           <h4 className="text-black align-top font-semibold">{task?.title}</h4>
           <p className="text-[#d4d3d8] text-md">{task.description}</p>
         </div>
-        <div className="flex flex-col gap-2">
-          <span className="cursor-pointer">
+        <div className="flex flex-col gap-2 px-2">
+          <span className="cursor-pointer has-tooltip">
+            <span className="tooltip  p-4 bg-orange-900 transition rounded-md mb-3 text-sm font-bold">
+              {task.reminder
+                ? new Date(task.reminder).toString()
+                : "No reminder"}
+            </span>
             <svg
               width={20}
               height={20}

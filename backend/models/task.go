@@ -2,6 +2,7 @@ package models
 
 import (
 	"errors"
+	"time"
 
 	"gorm.io/gorm"
 )
@@ -9,9 +10,9 @@ import (
 type TaskStatus string
 
 const (
-	TODO      TaskStatus = "TODO"
+	BACKLOG   TaskStatus = "BACKLOG"
 	COMPLETED TaskStatus = "COMPLETED"
-	CANCELED  TaskStatus = "CANCELED"
+	PENDING   TaskStatus = "PENDING"
 )
 
 type Task struct {
@@ -20,6 +21,7 @@ type Task struct {
 	Title       string     `gorm:"not null" json:"title"`
 	Description string     `gorm:"not null" json:"description"`
 	Status      TaskStatus `gorm:"type:varchar(11);not null" json:"status"`
+	Reminder    time.Time  `json:"reminder"`
 }
 
 type UserTask struct {
@@ -52,7 +54,7 @@ func (t *Task) Validate() error {
 	if t.Status == "" {
 		return errors.New("status is required")
 	}
-	if t.Status != TODO && t.Status != COMPLETED && t.Status != CANCELED {
+	if t.Status != BACKLOG && t.Status != COMPLETED && t.Status != PENDING {
 		return errors.New("status must be one of TODO, COMPLETED, or CANCELED")
 	}
 	return nil

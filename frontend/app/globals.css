@@ -34,3 +34,11 @@
   background-color: #ff9000;
   border-radius: 4px;
 }
+
+.tooltip {
+  @apply invisible absolute;
+}
+
+.has-tooltip:hover .tooltip {
+  @apply visible z-50;
+}
